@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDoList</title>
+</head>
+<style>
+
+    *{
+        padding: 0px;
+        margin: 0px;
+    }
+    .container{
+        width:100%;
+        height: 100vh;
+        background-color: rgb(46, 57, 43);
+        margin: auto auto;
+        display: flex;
+        flex-direction: column;
+    }
+    .container h2 {
+        font-family: Ubuntu,sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: 10vh;
+        color: rgb(255, 153, 132);
+        font-size: 40px;
+        
+    }
+    .inner-container {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         
+    }
+    .inner-container input {
+        background-color: black;
+        border: solid 3px greenyellow;
+        width: 300px;
+        border-radius: 20px;
+        margin: 5px;
+        color: white;
+        font-style: normal;
+        font-size: 30px;
+    }
+    .inner-container input :{
+        border: solid 3px greenyellow;
+    }
+    .inner-container input , button {
+        height: 50px;
+        border-radius: 10px;
+        
+    }
+   
+    .inner-container button {
+        background-color: red;
+        color: white;
+        font-family:sans-serif;
+        width: 50px;
+        border: none;
+        box-shadow: inset -3px -3px lightgrey ;
+        
+    }
+    .inner-container button.active{
+      animation: RemoveShadow 0.3s forwards;
+    }
+    @keyframes RemoveShadow {
+        0%{
+            box-shadow: inset -3px -3px lightgrey ;
+        }
+        50%{
+            box-shadow: none;
+        }
+        100%{
+            box-shadow: inset -3px -3px lightgrey ;;
+        }
+    }
+   .list{
+    width: 370px;
+    height: 500px;
+    border-radius: 20px;
+    background-color:rgb(6, 6, 6);
+    overflow: auto;
+    margin: auto auto;
+    
+    }
+    .list ul{
+        width: 350px;
+        margin: auto auto;
+       
+    }
+     .list ul li {
+        background-color: rgb(147, 147, 147);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: black;
+        font-size: 30px;
+        margin-top: 8px;
+    }
+    .list ul li button {
+        color: white;
+        margin: 3px;
+        background-color: rgb(43, 42, 42);
+        box-shadow: inset -2px -2px white;
+        border: none;
+    }
+</style>
+<body>
+    <div class="container" id="container">
+        <h2>To Do List</h2>
+        <div class="inner-container">
+       <input  id="inputtext"><button id="add" onclick="ShadowAnimation(this)" >Add</button>
+        </div>
+        <div class="list" >
+            <ul id="list"></ul>
+           
+        </div>
+    </div>
+</body>
+<script>
+
+let inputtext = document.querySelector("#inputtext");
+let list = document.querySelector("#list");
+const add = document.querySelector("#add");
+add.addEventListener("click", ()=> {
+    if(inputtext.value == ""){
+         alert("enter the task ! ")
+    }
+    else {
+    additem(inputtext);
+    }
+})
+let additem= (text) => {
+   let listitem = document.createElement("li");
+   let deleteitem = document.createElement("button");
+   listitem.innerHTML = `${inputtext.value}`;
+   deleteitem.innerHTML = "Delete";
+   list.appendChild(listitem);
+   listitem.append(deleteitem);
+   inputtext.value = "";
+
+   deleteitem.addEventListener("click", () => {
+   listitem.remove(); 
+   });
+   }
+ 
+
+  function ShadowAnimation(button) {
+  button.classList.add('active');
+
+  setTimeout(() => {
+    button.classList.remove('active');
+  }, 300);
+}
+
+
+    </script>
+</html>
+  
